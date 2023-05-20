@@ -54,6 +54,7 @@ public class MovementScript : MonoBehaviour
     public float slopeCheckPadding;
     private RaycastHit slopeRaycastHit;
     private bool exitingSlope;
+    private bool onSlopeLocal;
 
     [Header("References")]
     public Transform playerOrientation;
@@ -86,10 +87,7 @@ public class MovementScript : MonoBehaviour
             groundLayer
         );
 
-        if (grounded)
-        {
-            totalDash = 2;
-        }
+        totalDash = grounded ? 2 : totalDash;
 
         MovePlayer();
     }
@@ -169,7 +167,8 @@ public class MovementScript : MonoBehaviour
         moveDirection =
             playerOrientation.forward * verticalInput + playerOrientation.right * horizontalInput;
 
-        if (OnSlope())
+        onSlopeLocal = OnSlope();
+        if (onSlopeLocal)
         {
             rb.AddForce(10f * moveSpeed * GetSlopeMoveDirection().normalized, ForceMode.Force);
             if (rb.velocity.y > 0)
@@ -189,7 +188,7 @@ public class MovementScript : MonoBehaviour
             );
         }
 
-        rb.useGravity = !OnSlope();
+        rb.useGravity = !onSlopeLocal;
     }
 
     //  controls max speed
@@ -197,16 +196,26 @@ public class MovementScript : MonoBehaviour
     {
         if (!allowSpeedOverflow)
         {
-            Vector3 horizontalVel = new(rb.velocity.x, 0, rb.velocity.z);
-
-            if (horizontalVel.magnitude > moveSpeed)
+            // limiting on slope
+            if (OnSlope() && !exitingSlope)
             {
-                Vector3 horizontalVelDirection = horizontalVel.normalized * moveSpeed;
-                rb.velocity = new Vector3(
-                    horizontalVelDirection.x,
-                    rb.velocity.y,
-                    horizontalVelDirection.z
-                );
+                if (rb.velocity.magnitude > moveSpeed)
+                {
+                    rb.velocity = rb.velocity.normalized * moveSpeed;
+                }
+            }
+            else
+            {
+                Vector3 horizontalVel = new(rb.velocity.x, 0, rb.velocity.z);
+                if (horizontalVel.magnitude > moveSpeed)
+                {
+                    Vector3 horizontalVelDirection = horizontalVel.normalized * moveSpeed;
+                    rb.velocity = new Vector3(
+                        horizontalVelDirection.x,
+                        rb.velocity.y,
+                        horizontalVelDirection.z
+                    );
+                }
             }
         }
     }
