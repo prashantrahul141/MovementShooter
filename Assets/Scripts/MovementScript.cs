@@ -46,10 +46,12 @@ public class MovementScript : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask groundLayer;
+    public float groundCheckPadding;
     private bool grounded;
 
     [Header("Slope")]
     public float maxSlopeAngle;
+    public float slopeCheckPadding;
     private RaycastHit slopeRaycastHit;
     private bool exitingSlope;
 
@@ -79,7 +81,8 @@ public class MovementScript : MonoBehaviour
         grounded = Physics.Raycast(
             transform.position,
             Vector3.down,
-            playerHeight * 0.5f * (movementState == MovementState.CROUCHING ? 0.5f : 1f) + 0.3f,
+            playerHeight * 0.5f * (movementState == MovementState.CROUCHING ? 0.5f : 1f)
+                + groundCheckPadding,
             groundLayer
         );
 
@@ -216,7 +219,7 @@ public class MovementScript : MonoBehaviour
                 transform.position,
                 Vector3.down,
                 out slopeRaycastHit,
-                playerHeight * 0.5f + 0.3f
+                playerHeight * 0.5f + slopeCheckPadding
             )
         )
         {
