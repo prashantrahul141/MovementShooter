@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101850201}
   - component: {fileID: 101850202}
+  - component: {fileID: 101850203}
   m_Layer: 0
   m_Name: CameraFollower
   m_TagString: Untagged
@@ -148,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101850200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.04, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -169,6 +170,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosition: {fileID: 1349441543}
+--- !u!114 &101850203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101850200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b131fdf7889bf4a99cd344b2857818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensX: 200
+  sensY: 200
+  playerOrientation: {fileID: 1896167769}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +290,7 @@ GameObject:
   - component: {fileID: 789592349}
   - component: {fileID: 789592350}
   - component: {fileID: 789592351}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,13 +328,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 20
-  dashSpeed: 22
   groundDrag: 5
-  airDrag: 5
-  jumpForce: 5
-  jumpCoolDown: 0.5
-  airMultiplier: 1
-  crouchSpeed: 8
+  airDrag: 1
+  jumpForce: 18
+  jumpCoolDown: 1
+  airMultiplier: 0.1
+  dashCoolDown: 0.4
+  dashForce: 15
+  totalDash: 2
+  crouchSpeed: 15
   crouchYScale: 0.5
   jumpKey: 32
   dashKey: 304
@@ -329,8 +347,8 @@ MonoBehaviour:
     m_Bits: 8
   maxSlopeAngle: 70
   playerOrientation: {fileID: 1896167769}
-  movementState: 0
-  rb: {fileID: 0}
+  movementState: 3
+  rb: {fileID: 789592351}
 --- !u!54 &789592351
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -358,7 +376,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -425,28 +442,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 101850201}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b131fdf7889bf4a99cd344b2857818, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensX: 200
-  sensY: 200
-  playerOrientation: {fileID: 1896167769}
 --- !u!1 &1267392471
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +461,7 @@ GameObject:
   - component: {fileID: 1267392474}
   - component: {fileID: 1267392473}
   - component: {fileID: 1267392472}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: playerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,8 +556,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1349441543}
-  m_Layer: 0
-  m_Name: position
+  m_Layer: 6
+  m_Name: playerPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -569,7 +571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1349441542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -663,8 +665,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1896167769}
-  m_Layer: 0
-  m_Name: orientation
+  m_Layer: 6
+  m_Name: playerOrientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -709,7 +711,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976925596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.04, z: 0}
+  m_LocalPosition: {x: 0, y: 1.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
