@@ -105,7 +105,7 @@ public class MovementScript : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCoolDown);
         }
 
-        if (Input.GetKey(dashKey) && readyToDash && totalDash > 0)
+        if (Input.GetKeyDown(dashKey) && readyToDash && totalDash > 0)
         {
             readyToDash = false;
             totalDash--;
