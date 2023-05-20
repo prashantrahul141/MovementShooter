@@ -4,7 +4,6 @@ using UnityEngine;
 public enum MovementState
 {
     WALKING,
-    DASHING,
     CROUCHING,
     AIR
 }
@@ -14,7 +13,6 @@ public class MovementScript : MonoBehaviour
     [Header("Basic Movement")]
     private float moveSpeed = 7f;
     public float walkSpeed;
-    public float dashSpeed;
 
     public float groundDrag;
     public float airDrag;
@@ -24,6 +22,13 @@ public class MovementScript : MonoBehaviour
     public float jumpCoolDown;
     public float airMultiplier;
     private bool readyToJump = true;
+
+    [Header("Dashing")]
+    public float dashCoolDown;
+    public float dashForce;
+    public int totalDash = 2;
+    private bool readyToDash = true;
+    private bool allowSpeedOverflow = false;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -44,6 +49,7 @@ public class MovementScript : MonoBehaviour
     [Header("Slope")]
     public float maxSlopeAngle;
     private RaycastHit slopeRaycastHit;
+    private bool exitingSlope;
 
     public Transform playerOrientation;
     public MovementState movementState;
@@ -78,6 +84,11 @@ public class MovementScript : MonoBehaviour
             groundLayer
         );
 
+        if (grounded)
+        {
+            totalDash = 2;
+        }
+
         MovePlayer();
     }
 
@@ -86,6 +97,22 @@ public class MovementScript : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        {
+            readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCoolDown);
+        }
+
+        if (Input.GetKey(dashKey) && readyToDash && totalDash > 0)
+        {
+            readyToDash = false;
+            totalDash--;
+            allowSpeedOverflow = true;
+            Dash();
+            Invoke(nameof(ResetDash), dashCoolDown);
+        }
 
         if (Input.GetKey(crouchKey))
         {
@@ -120,12 +147,6 @@ public class MovementScript : MonoBehaviour
         {
             movementState = MovementState.CROUCHING;
             moveSpeed = crouchSpeed;
-        }
-        // set sprinting
-        else if (Input.GetKey(dashKey))
-        {
-            movementState = MovementState.DASHING;
-            moveSpeed = dashSpeed;
         }
         // set walking
         else if (grounded)
@@ -172,16 +193,19 @@ public class MovementScript : MonoBehaviour
     //  controls max speed
     private void SpeedControl()
     {
-        Vector3 horizontalVel = new(rb.velocity.x, 0, rb.velocity.z);
-
-        if (horizontalVel.magnitude > moveSpeed)
+        if (!allowSpeedOverflow)
         {
-            Vector3 horizontalVelDirection = horizontalVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(
-                horizontalVelDirection.x,
-                rb.velocity.y,
-                horizontalVelDirection.z
-            );
+            Vector3 horizontalVel = new(rb.velocity.x, 0, rb.velocity.z);
+
+            if (horizontalVel.magnitude > moveSpeed)
+            {
+                Vector3 horizontalVelDirection = horizontalVel.normalized * moveSpeed;
+                rb.velocity = new Vector3(
+                    horizontalVelDirection.x,
+                    rb.velocity.y,
+                    horizontalVelDirection.z
+                );
+            }
         }
     }
 
@@ -204,8 +228,38 @@ public class MovementScript : MonoBehaviour
         return false;
     }
 
+    // returns slope direction on which player is standing
     private Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(moveDirection, slopeRaycastHit.normal);
+    }
+
+    // adds force to player.
+    private void Jump()
+    {
+        exitingSlope = true;
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    }
+
+    // resets jump after sometime.
+    private void ResetJump()
+    {
+        exitingSlope = false;
+        readyToJump = true;
+    }
+
+    // adds force for player to dash
+    private void Dash()
+    {
+        rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        rb.AddForce(moveDirection.normalized * dashForce, ForceMode.Impulse);
+    }
+
+    // resets player's dash
+    private void ResetDash()
+    {
+        allowSpeedOverflow = false;
+        readyToDash = true;
     }
 }
