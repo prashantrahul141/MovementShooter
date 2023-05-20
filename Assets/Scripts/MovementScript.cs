@@ -11,11 +11,13 @@ public enum MovementState
 public class MovementScript : MonoBehaviour
 {
     [Header("Basic Movement")]
-    private float moveSpeed = 7f;
     public float walkSpeed;
-
     public float groundDrag;
     public float airDrag;
+    private float moveSpeed = 7f;
+    private Vector3 moveDirection;
+    private float horizontalInput;
+    private float verticalInput;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -51,13 +53,10 @@ public class MovementScript : MonoBehaviour
     private RaycastHit slopeRaycastHit;
     private bool exitingSlope;
 
+    [Header("References")]
     public Transform playerOrientation;
     public MovementState movementState;
     public Rigidbody rb;
-
-    private float horizontalInput;
-    private float verticalInput;
-    private Vector3 moveDirection;
 
     void Start()
     {
