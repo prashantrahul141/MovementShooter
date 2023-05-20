@@ -35,6 +35,10 @@ public class MovementScript : MonoBehaviour
     [Header("Crouching")]
     public float crouchSpeed;
     public float crouchYScale;
+    public float pushDownForce;
+    private bool pushedDownAlready;
+    private RaycastHit midAirGroundCast;
+    private bool pushDownPlayer;
     private float startYScale;
     private bool remainCrouched;
 
@@ -86,8 +90,11 @@ public class MovementScript : MonoBehaviour
                 + groundCheckPadding,
             groundLayer
         );
-
-        totalDash = grounded ? 2 : totalDash;
+        if (grounded)
+        {
+            totalDash = 2;
+            pushedDownAlready = false;
+        }
 
         MovePlayer();
     }
@@ -145,6 +152,10 @@ public class MovementScript : MonoBehaviour
         // set crouching
         if (Input.GetKey(crouchKey))
         {
+            if (movementState == MovementState.AIR)
+            {
+                pushDownPlayer = true;
+            }
             movementState = MovementState.CROUCHING;
             moveSpeed = crouchSpeed;
         }
@@ -166,6 +177,12 @@ public class MovementScript : MonoBehaviour
     {
         moveDirection =
             playerOrientation.forward * verticalInput + playerOrientation.right * horizontalInput;
+
+        if (pushDownPlayer && !pushedDownAlready)
+        {
+            pushDownPlayer = false;
+            PushDown();
+        }
 
         onSlopeLocal = OnSlope();
         if (onSlopeLocal)
@@ -272,5 +289,13 @@ public class MovementScript : MonoBehaviour
     {
         allowSpeedOverflow = false;
         readyToDash = true;
+    }
+
+    private void PushDown()
+    {
+        Physics.Raycast(rb.position, Vector3.down, out midAirGroundCast, 30, groundLayer);
+        pushedDownAlready = true;
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        rb.AddForce(Vector3.down * midAirGroundCast.distance * pushDownForce, ForceMode.Impulse);
     }
 }
