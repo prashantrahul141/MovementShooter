@@ -281,8 +281,18 @@ public class MovementScript : MonoBehaviour
     // adds force for player to dash
     private void Dash()
     {
-        rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        rb.AddForce(moveDirection.normalized * dashForce, ForceMode.Impulse);
+        if (moveDirection.magnitude != 0)
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            rb.AddForce(moveDirection.normalized * dashForce, ForceMode.Impulse);
+        }
+        else
+        {
+            rb.AddForce(
+                new Vector3(rb.velocity.normalized.x, 0, rb.velocity.normalized.z) * dashForce,
+                ForceMode.Impulse
+            );
+        }
     }
 
     // resets player's dash
