@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 // player states
@@ -183,7 +184,7 @@ public class MovementScript : MonoBehaviour
         if (pushDownPlayer && !pushedDownAlready)
         {
             pushDownPlayer = false;
-            PushDown();
+            StartCoroutine(PushDown());
         }
 
         onSlopeLocal = OnSlope();
@@ -223,6 +224,7 @@ public class MovementScript : MonoBehaviour
                     rb.velocity = rb.velocity.normalized * moveSpeed;
                 }
             }
+            // limiting on ground.
             else
             {
                 Vector3 horizontalVel = new(rb.velocity.x, 0, rb.velocity.z);
@@ -310,12 +312,28 @@ public class MovementScript : MonoBehaviour
         readyToDash = true;
     }
 
-    private void PushDown()
+    // pushing down player on mid air crouch.
+    private IEnumerator PushDown()
     {
-        Physics.Raycast(rb.position, Vector3.down, out midAirGroundCast, 30, groundLayer);
-        pushedDownAlready = true;
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        rb.AddForce(Vector3.down * midAirGroundCast.distance * pushDownForce, ForceMode.Impulse);
+        for (int i = 0; i < 10; i++)
+        {
+            Physics.Raycast(rb.position, Vector3.down, out midAirGroundCast, 30, groundLayer);
+            if (midAirGroundCast.distance > 2)
+            {
+                rb.AddForce(
+                    Vector3.down * midAirGroundCast.distance * pushDownForce,
+                    ForceMode.Impulse
+                );
+
+                yield return new WaitForSeconds(0.1f);
+            }
+            else
+            {
+                pushedDownAlready = true;
+                yield break;
+            }
+        }
     }
 
     //  stops player from moving through the terrain;
