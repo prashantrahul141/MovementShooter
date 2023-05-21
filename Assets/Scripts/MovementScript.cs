@@ -78,6 +78,7 @@ public class MovementScript : MonoBehaviour
         GetInput();
         SpeedControl();
         StateHandler();
+        StopPassingDownTerrain();
         rb.drag = grounded ? groundDrag : airDrag;
     }
 
@@ -297,5 +298,14 @@ public class MovementScript : MonoBehaviour
         pushedDownAlready = true;
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(Vector3.down * midAirGroundCast.distance * pushDownForce, ForceMode.Impulse);
+    }
+
+    //  stops player from moving through the terrain;
+    private void StopPassingDownTerrain()
+    {
+        if (transform.position.y < 0)
+        {
+            transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+        }
     }
 }
