@@ -31,6 +31,7 @@ public class MovementScript : MonoBehaviour
     public int totalDash = 2;
     private bool readyToDash = true;
     private bool allowSpeedOverflow = false;
+    private Vector3 groundNormal = new Vector3(0, 1, 0).normalized;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -283,15 +284,22 @@ public class MovementScript : MonoBehaviour
     {
         if (moveDirection.magnitude != 0)
         {
+            //  dashing in the direction of keys pressed
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             rb.AddForce(moveDirection.normalized * dashForce, ForceMode.Impulse);
         }
-        else
+        else if (rb.velocity.x != 0 || rb.velocity.z != 0)
         {
+            //  dashing in the direction of player velocity if no key is pressed
             rb.AddForce(
-                new Vector3(rb.velocity.normalized.x, 0, rb.velocity.normalized.z) * dashForce,
+                Vector3.ProjectOnPlane(rb.velocity.normalized, groundNormal) * dashForce,
                 ForceMode.Impulse
             );
+        }
+        else
+        {
+            // dashing forward if no key is pressed and player does not have any horizontal velocity.
+            rb.AddForce(playerOrientation.forward * dashForce, ForceMode.Impulse);
         }
     }
 
