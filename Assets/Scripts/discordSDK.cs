@@ -1,8 +1,12 @@
 using UnityEngine;
+
+#if !UNITY_EDITOR
 using Discord;
+#endif
 
 public class discordSDK : MonoBehaviour
 {
+#if !UNITY_EDITOR
     public Discord.Discord discord;
 
     void Start()
@@ -23,7 +27,7 @@ public class discordSDK : MonoBehaviour
             {
                 if (res == Discord.Result.Ok)
                 {
-                    Debug.Log("Everything is fine!");
+                    Debug.Log("Starting Discord SDK.");
                 }
             }
         );
@@ -33,4 +37,5 @@ public class discordSDK : MonoBehaviour
     {
         discord.RunCallbacks();
     }
+#endif
 }
