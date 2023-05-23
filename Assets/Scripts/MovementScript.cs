@@ -293,15 +293,17 @@ public class MovementScript : MonoBehaviour
         else if (rb.velocity.x != 0 || rb.velocity.z != 0)
         {
             //  dashing in the direction of player velocity if no key is pressed
-            rb.AddForce(
-                Vector3.ProjectOnPlane(rb.velocity.normalized, groundNormal) * dashForce,
-                ForceMode.Impulse
-            );
+            Vector3 dir = Vector3.ProjectOnPlane(rb.velocity.normalized, groundNormal);
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            rb.AddForce(dir * dashForce, ForceMode.Impulse);
         }
         else
         {
             // dashing forward if no key is pressed and player does not have any horizontal velocity.
-            rb.AddForce(playerOrientation.forward * dashForce, ForceMode.Impulse);
+            rb.AddForce(
+                Vector3.ProjectOnPlane(playerOrientation.forward, groundNormal) * dashForce,
+                ForceMode.Impulse
+            );
         }
     }
 
