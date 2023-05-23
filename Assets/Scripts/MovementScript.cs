@@ -174,7 +174,6 @@ public class MovementScript : MonoBehaviour
             pushDownPlayer = false;
             StartCoroutine(PushDown());
         }
-        print(movementState);
         onSlopeLocal = OnSlope();
         if (onSlopeLocal)
         {
