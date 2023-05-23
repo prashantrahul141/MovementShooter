@@ -27,8 +27,7 @@ public class GunSystem : MonoBehaviour
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash_GunCamera;
-
-    // public ParticleSystem muzzleFlash_MainCamera;
+    public ParticleSystem muzzleFlash_MainCamera;
     public GameObject bulletHoleGraphic;
     public Transform gunModel;
 
@@ -86,7 +85,7 @@ public class GunSystem : MonoBehaviour
             Quaternion.FromToRotation(Vector3.forward, rayHit.normal)
         );
         muzzleFlash_GunCamera.Play();
-        // muzzleFlash_MainCamera.Play();
+        muzzleFlash_MainCamera.Play();
 
         bulletsLeft--;
         bulletsShot--;
