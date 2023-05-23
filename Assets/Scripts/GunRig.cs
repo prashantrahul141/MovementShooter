@@ -5,7 +5,7 @@ public class GunRig : MonoBehaviour
     public int selectedGun;
     public GameObject gunHolder;
 
-    public Transform cameraPosition;
+    public Transform cameraTransform;
 
     private int previousSelected;
 
@@ -16,7 +16,8 @@ public class GunRig : MonoBehaviour
 
     void Update()
     {
-        transform.position = cameraPosition.position;
+        transform.position = cameraTransform.position;
+        transform.rotation = cameraTransform.rotation;
         GetInput();
     }
 
