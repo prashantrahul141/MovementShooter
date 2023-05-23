@@ -234,7 +234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4180067097121351941, guid: 1d9251e59d82bdd41a8bf38de334ffc3, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337179537692982567, guid: 1d9251e59d82bdd41a8bf38de334ffc3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6481487271229353098, guid: 1d9251e59d82bdd41a8bf38de334ffc3, type: 3}
       propertyPath: m_Name
@@ -298,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614083703908357643, guid: 1d9251e59d82bdd41a8bf38de334ffc3, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8941937576617551447, guid: 1d9251e59d82bdd41a8bf38de334ffc3, type: 3}
       propertyPath: allowButtonHold
