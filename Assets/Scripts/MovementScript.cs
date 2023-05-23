@@ -41,7 +41,6 @@ public class MovementScript : MonoBehaviour
     private bool pushedDownAlready;
     private RaycastHit midAirGroundCast;
     private bool pushDownPlayer;
-    private float startYScale;
     private bool remainCrouched;
 
     [Header("Key Binds")]
@@ -72,7 +71,6 @@ public class MovementScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
-        startYScale = transform.localScale.y;
     }
 
     void Update()
@@ -80,7 +78,6 @@ public class MovementScript : MonoBehaviour
         GetInput();
         SpeedControl();
         StateHandler();
-        StopPassingDownTerrain();
         rb.drag = grounded ? groundDrag : airDrag;
     }
 
@@ -126,11 +123,6 @@ public class MovementScript : MonoBehaviour
 
         if (Input.GetKey(crouchKey))
         {
-            transform.localScale = new Vector3(
-                transform.localScale.x,
-                crouchYScale,
-                transform.localScale.z
-            );
             if (remainCrouched)
             {
                 rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
@@ -141,11 +133,6 @@ public class MovementScript : MonoBehaviour
         if (!Input.GetKey(crouchKey))
         {
             remainCrouched = true;
-            transform.localScale = new Vector3(
-                transform.localScale.x,
-                startYScale,
-                transform.localScale.z
-            );
         }
     }
 
@@ -180,13 +167,14 @@ public class MovementScript : MonoBehaviour
     {
         moveDirection =
             playerOrientation.forward * verticalInput + playerOrientation.right * horizontalInput;
+        moveDirection = Vector3.ProjectOnPlane(moveDirection, groundNormal);
 
         if (pushDownPlayer && !pushedDownAlready)
         {
             pushDownPlayer = false;
             StartCoroutine(PushDown());
         }
-
+        print(movementState);
         onSlopeLocal = OnSlope();
         if (onSlopeLocal)
         {
