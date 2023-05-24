@@ -54,10 +54,17 @@ public class GunSystem : MonoBehaviour
         }
 
         // when to shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (bulletsLeft <= 0)
         {
-            bulletsShot = bulletsPerTap;
-            Shoot();
+            BulletsOver();
+        }
+        else
+        {
+            if (readyToShoot && shooting && !reloading)
+            {
+                bulletsShot = bulletsPerTap;
+                Shoot();
+            }
         }
     }
 
@@ -114,6 +121,11 @@ public class GunSystem : MonoBehaviour
         Debug.Log("Finished Reloading.");
         bulletsLeft = magazineSize;
         reloading = false;
+    }
+
+    private void BulletsOver()
+    {
+        Debug.Log("Bullets Over.");
     }
 
     public bool IsShooting()

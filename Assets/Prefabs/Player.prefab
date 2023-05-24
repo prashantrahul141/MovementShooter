@@ -61,7 +61,7 @@ MonoBehaviour:
   attackPoint: {fileID: 937452019663748928}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 191
   muzzleFlash_GunCamera: {fileID: 3283082313625164077}
   muzzleFlash_MainCamera: {fileID: 5773365757592663196}
   bulletHoleGraphic: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
@@ -127,7 +127,7 @@ MonoBehaviour:
   attackPoint: {fileID: 937452019663748928}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 191
   muzzleFlash_GunCamera: {fileID: 7484741834134975704}
   muzzleFlash_MainCamera: {fileID: 5081574348902278828}
   bulletHoleGraphic: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
@@ -693,7 +693,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6672378135167155387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.103, z: 0.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -761,7 +761,7 @@ MonoBehaviour:
   attackPoint: {fileID: 937452019663748928}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 191
   muzzleFlash_GunCamera: {fileID: 6340557567287485119}
   muzzleFlash_MainCamera: {fileID: 8627231505490675724}
   bulletHoleGraphic: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
