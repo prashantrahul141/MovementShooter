@@ -26,7 +26,9 @@ public class MovementScript : MonoBehaviour
     public float jumpCoolDown;
     public float airMultiplier;
     public float coyoteTime;
+    public float jumpBufferTime;
     private float coyoteTimeCounter;
+    private float jumpBufferCounter;
     private bool readyToJump = true;
 
     [Header("Dashing")]
@@ -113,7 +115,11 @@ public class MovementScript : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(jumpKey) && readyToJump && coyoteTimeCounter > 0)
+        jumpBufferCounter = Input.GetKey(jumpKey)
+            ? jumpBufferTime
+            : jumpBufferCounter - Time.deltaTime;
+
+        if (jumpBufferCounter > 0 && readyToJump && coyoteTimeCounter > 0)
         {
             readyToJump = false;
             Jump();
