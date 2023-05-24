@@ -277,16 +277,15 @@ public class MovementScript : MonoBehaviour
     // adds force for player to dash
     private void Dash()
     {
+        rb.useGravity = false;
         if (moveDirection.magnitude >= 0.1f)
         {
-            print("case 1");
             //  dashing in the direction of keys pressed
             rb.velocity = new Vector3(0, 0, 0);
             rb.AddForce(moveDirection.normalized * dashForce, ForceMode.Impulse);
         }
         else
         {
-            print("case 3");
             // dashing forward if no key is pressed and player does not have any horizontal velocity.
             rb.velocity = new Vector3(0, 0, 0);
             rb.AddForce(
@@ -299,6 +298,7 @@ public class MovementScript : MonoBehaviour
     // resets player's dash
     private void ResetDash()
     {
+        rb.useGravity = true;
         allowSpeedOverflow = false;
         readyToDash = true;
     }
