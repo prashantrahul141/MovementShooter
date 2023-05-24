@@ -475,7 +475,9 @@ MonoBehaviour:
   jumpForce: 18
   jumpCoolDown: 1
   airMultiplier: 0.1
-  dashCoolDown: 0.3
+  coyoteTime: 0.2
+  jumpBufferTime: 0.2
+  dashCoolDown: 0.4
   dashForce: 40
   totalDash: 2
   crouchSpeed: 14
