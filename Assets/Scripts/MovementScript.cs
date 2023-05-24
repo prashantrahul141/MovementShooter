@@ -6,6 +6,7 @@ public enum MovementState
 {
     WALKING,
     CROUCHING,
+    DASHING,
     AIR
 }
 
@@ -78,7 +79,7 @@ public class MovementScript : MonoBehaviour
         GetInput();
         SpeedControl();
         StateHandler();
-        rb.drag = grounded ? groundDrag : airDrag;
+        rb.drag = getCurrentDrag();
     }
 
     void FixedUpdate()
@@ -139,8 +140,13 @@ public class MovementScript : MonoBehaviour
     // Manages player states
     private void StateHandler()
     {
+        // set dashing
+        if (allowSpeedOverflow)
+        {
+            movementState = MovementState.DASHING;
+        }
         // set crouching
-        if (Input.GetKey(crouchKey))
+        else if (Input.GetKey(crouchKey))
         {
             if (movementState == MovementState.AIR)
             {
@@ -271,22 +277,18 @@ public class MovementScript : MonoBehaviour
     // adds force for player to dash
     private void Dash()
     {
-        if (moveDirection.magnitude != 0)
+        if (moveDirection.magnitude >= 0.1f)
         {
+            print("case 1");
             //  dashing in the direction of keys pressed
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            rb.velocity = new Vector3(0, 0, 0);
             rb.AddForce(moveDirection.normalized * dashForce, ForceMode.Impulse);
-        }
-        else if (rb.velocity.x != 0 || rb.velocity.z != 0)
-        {
-            //  dashing in the direction of player velocity if no key is pressed
-            Vector3 dir = Vector3.ProjectOnPlane(rb.velocity.normalized, groundNormal);
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            rb.AddForce(dir * dashForce, ForceMode.Impulse);
         }
         else
         {
+            print("case 3");
             // dashing forward if no key is pressed and player does not have any horizontal velocity.
+            rb.velocity = new Vector3(0, 0, 0);
             rb.AddForce(
                 Vector3.ProjectOnPlane(playerOrientation.forward, groundNormal) * dashForce,
                 ForceMode.Impulse
@@ -331,6 +333,18 @@ public class MovementScript : MonoBehaviour
         if (transform.position.y < 0)
         {
             transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+        }
+    }
+
+    private float getCurrentDrag()
+    {
+        if (movementState == MovementState.DASHING)
+        {
+            return 0.0f;
+        }
+        else
+        {
+            return grounded ? groundDrag : airDrag;
         }
     }
 }
