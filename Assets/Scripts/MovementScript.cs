@@ -25,6 +25,8 @@ public class MovementScript : MonoBehaviour
     public float jumpForce;
     public float jumpCoolDown;
     public float airMultiplier;
+    public float coyoteTime;
+    private float coyoteTimeCounter;
     private bool readyToJump = true;
 
     [Header("Dashing")]
@@ -95,6 +97,11 @@ public class MovementScript : MonoBehaviour
         {
             totalDash = 2;
             pushedDownAlready = false;
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
         }
 
         MovePlayer();
@@ -106,7 +113,7 @@ public class MovementScript : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && readyToJump && coyoteTimeCounter > 0)
         {
             readyToJump = false;
             Jump();
@@ -262,6 +269,7 @@ public class MovementScript : MonoBehaviour
     // adds force to player.
     private void Jump()
     {
+        coyoteTimeCounter = 0.0f;
         exitingSlope = true;
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
