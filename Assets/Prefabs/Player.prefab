@@ -476,7 +476,7 @@ MonoBehaviour:
   jumpCoolDown: 1
   airMultiplier: 0.1
   dashCoolDown: 0.3
-  dashForce: 33
+  dashForce: 40
   totalDash: 2
   crouchSpeed: 14
   crouchYScale: 0.5
