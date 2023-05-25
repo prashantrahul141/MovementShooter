@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 150245902646267867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc97db6852e91ae47a754de4d83acf38, type: 3}
+  m_Script: {fileID: 11500000, guid: eb7b2d988b9141a4f8c03a2a4843f5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
@@ -64,7 +64,6 @@ MonoBehaviour:
     m_Bits: 191
   muzzleFlash_GunCamera: {fileID: 3283082313625164077}
   muzzleFlash_MainCamera: {fileID: 5773365757592663196}
-  bulletHoleGraphic: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   gunModel: {fileID: 7679162757941905588}
 --- !u!1 &199014890984741956
 GameObject:
@@ -110,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 199014890984741956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc97db6852e91ae47a754de4d83acf38, type: 3}
+  m_Script: {fileID: 11500000, guid: eb7b2d988b9141a4f8c03a2a4843f5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
@@ -130,7 +129,6 @@ MonoBehaviour:
     m_Bits: 191
   muzzleFlash_GunCamera: {fileID: 7484741834134975704}
   muzzleFlash_MainCamera: {fileID: 5081574348902278828}
-  bulletHoleGraphic: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   gunModel: {fileID: 2241830564326287432}
 --- !u!1 &762506011118686135
 GameObject:
@@ -261,7 +259,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2718214239249992238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 125dafe7a0084444bb13d40c53f404ff, type: 3}
+  m_Script: {fileID: 11500000, guid: abe92112a9776044ca5557833dc33576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   crouchYScale: 0.5
@@ -342,7 +340,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4370247822353580717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d45c5f2ac9891a4a98bbcb2f96227bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 012b6a68acad1324bae75c2b1a485967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4681750679347553993
@@ -466,7 +464,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6481487271229353098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8de071dd1df10ab44aa1add9bf107d12, type: 3}
+  m_Script: {fileID: 11500000, guid: 49f6a0ac18840084c85f5b26fda06678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 20
@@ -936,7 +934,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8410143695967535613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc97db6852e91ae47a754de4d83acf38, type: 3}
+  m_Script: {fileID: 11500000, guid: eb7b2d988b9141a4f8c03a2a4843f5b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 40
@@ -956,7 +954,6 @@ MonoBehaviour:
     m_Bits: 191
   muzzleFlash_GunCamera: {fileID: 6340557567287485119}
   muzzleFlash_MainCamera: {fileID: 8627231505490675724}
-  bulletHoleGraphic: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
   gunModel: {fileID: 4221033747958614908}
 --- !u!1 &8885331985900941961
 GameObject:
@@ -1001,7 +998,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8885331985900941961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b71eca8f075fe654083e95b4f2bc1047, type: 3}
+  m_Script: {fileID: 11500000, guid: f2cd0921c4c8b6b49b37903752950bce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectedGun: 0
@@ -1050,7 +1047,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8893151478717169100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e7b1537966826543a2c5c6b7ae75ef7, type: 3}
+  m_Script: {fileID: 11500000, guid: 93feb33be5147244482c0f9774cc3436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosition: {fileID: 6481487271712886161}
@@ -1063,7 +1060,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8893151478717169100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b131fdf7889bf4a99cd344b2857818, type: 3}
+  m_Script: {fileID: 11500000, guid: 35eb3ff2f5b6647448cb6912bae27499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sensX: 200

@@ -6,6 +6,6 @@ public class AttackPointFollow : MonoBehaviour
 
     void Update()
     {
-        transform.rotation = playerOrientation.rotation;
+        // transform.rotation = playerOrientation.rotation;
     }
 }
