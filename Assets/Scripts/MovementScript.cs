@@ -132,10 +132,7 @@ public class MovementScript : MonoBehaviour
             totalDash--;
             allowSpeedOverflow = true;
             Dash();
-            Invoke(
-                nameof(ResetDash),
-                dashCoolDown + (movementState == MovementState.AIR ? 0.3f : 0.0f)
-            );
+            Invoke(nameof(ResetDash), dashCoolDown);
         }
 
         if (Input.GetKey(crouchKey))
@@ -295,7 +292,7 @@ public class MovementScript : MonoBehaviour
     private void Dash()
     {
         rb.useGravity = false;
-        rb.velocity = new Vector3(0, 0, 0);
+        rb.velocity = new Vector3(0, 3f, 0);
         if (moveDirection.magnitude >= 0.1f)
         {
             //  dashing in the direction of keys pressed
