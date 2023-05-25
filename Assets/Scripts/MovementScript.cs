@@ -319,25 +319,19 @@ public class MovementScript : MonoBehaviour
     // pushing down player on mid air crouch.
     private IEnumerator PushDown()
     {
-        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        for (int i = 0; i < 10; i++)
+        do
         {
-            Physics.Raycast(rb.position, Vector3.down, out midAirGroundCast, 30, groundLayer);
-            if (midAirGroundCast.distance > 2)
-            {
-                rb.AddForce(
-                    Vector3.down * midAirGroundCast.distance * pushDownForce,
-                    ForceMode.Impulse
-                );
+            Physics.Raycast(rb.position, Vector3.down, out midAirGroundCast, 50, groundLayer);
+            rb.AddForce(
+                Vector3.down * midAirGroundCast.distance * pushDownForce,
+                ForceMode.Impulse
+            );
 
-                yield return new WaitForSeconds(0.1f);
-            }
-            else
-            {
-                pushedDownAlready = true;
-                yield break;
-            }
-        }
+            yield return new WaitForSeconds(0.07f);
+        } while (midAirGroundCast.distance > 1.3);
+
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        pushedDownAlready = true;
     }
 
     //  stops player from moving through the terrain;
