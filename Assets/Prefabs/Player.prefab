@@ -56,12 +56,15 @@ MonoBehaviour:
   magazineSize: 30
   bulletsPerTap: 1
   allowButtonHold: 1
+  recoilX: -8
+  recoilY: 1
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 6558075695794913438}
   attackPoint: {fileID: 937452019663748928}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 191
+  recoilScript: {fileID: 9137898388645658778}
   muzzleFlash_GunCamera: {fileID: 3283082313625164077}
   muzzleFlash_MainCamera: {fileID: 5773365757592663196}
   gunModel: {fileID: 7679162757941905588}
@@ -121,12 +124,15 @@ MonoBehaviour:
   magazineSize: 12
   bulletsPerTap: 1
   allowButtonHold: 0
+  recoilX: -3
+  recoilY: 0.3
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 3410160221505657101}
   attackPoint: {fileID: 937452019663748928}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 191
+  recoilScript: {fileID: 9137898388645658778}
   muzzleFlash_GunCamera: {fileID: 7484741834134975704}
   muzzleFlash_MainCamera: {fileID: 5081574348902278828}
   gunModel: {fileID: 2241830564326287432}
@@ -156,12 +162,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762506011118686135}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3355110592844539030}
-  m_Father: {fileID: 8277653869057321487}
+  m_Father: {fileID: 5215427788369743351}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3410160221505657101
@@ -195,7 +201,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 127
+    m_Bits: 63
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -264,6 +270,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crouchYScale: 0.5
   startYScale: 1
+--- !u!1 &3850920994250759353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5215427788369743351}
+  - component: {fileID: 9137898388645658778}
+  m_Layer: 0
+  m_Name: Recoil
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5215427788369743351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850920994250759353}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8218948749520793695}
+  m_Father: {fileID: 8277653869057321487}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9137898388645658778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850920994250759353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e6e4989eb80834cac7be8160b68617, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snappiness: 12
+  returnSpeed: 5
 --- !u!1 &4043006097981244347
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,12 +999,15 @@ MonoBehaviour:
   magazineSize: 12
   bulletsPerTap: 3
   allowButtonHold: 0
+  recoilX: -10
+  recoilY: 2
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 6558075695794913438}
   attackPoint: {fileID: 937452019663748928}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 191
+  recoilScript: {fileID: 9137898388645658778}
   muzzleFlash_GunCamera: {fileID: 6340557567287485119}
   muzzleFlash_MainCamera: {fileID: 8627231505490675724}
   gunModel: {fileID: 4221033747958614908}
@@ -1034,7 +1090,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8218948749520793695}
+  - {fileID: 5215427788369743351}
   m_Father: {fileID: 6614083703908357643}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
