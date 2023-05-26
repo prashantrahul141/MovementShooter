@@ -56,8 +56,8 @@ MonoBehaviour:
   magazineSize: 30
   bulletsPerTap: 1
   allowButtonHold: 1
-  recoilX: -8
-  recoilY: 1
+  recoilX: -2
+  recoilY: 7
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 6558075695794913438}
   attackPoint: {fileID: 937452019663748928}
@@ -125,8 +125,8 @@ MonoBehaviour:
   magazineSize: 12
   bulletsPerTap: 1
   allowButtonHold: 0
-  recoilX: -3
-  recoilY: 0.3
+  recoilX: -2
+  recoilY: 5
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 3410160221505657101}
   attackPoint: {fileID: 937452019663748928}
@@ -1019,8 +1019,8 @@ MonoBehaviour:
   magazineSize: 12
   bulletsPerTap: 3
   allowButtonHold: 0
-  recoilX: -10
-  recoilY: 2
+  recoilX: -3
+  recoilY: 15
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 6558075695794913438}
   attackPoint: {fileID: 937452019663748928}
