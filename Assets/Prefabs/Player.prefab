@@ -543,13 +543,13 @@ MonoBehaviour:
   walkSpeed: 20
   groundDrag: 5
   airDrag: 1
-  jumpForce: 18
+  jumpForce: 22
   jumpCoolDown: 1
-  airMultiplier: 0.2
+  airMultiplier: 0.25
   coyoteTime: 0.2
   jumpBufferTime: 0.2
   dashCoolDown: 0.2
-  dashForce: 60
+  dashForce: 70
   totalDash: 2
   crouchSpeed: 14
   crouchYScale: 0.5
