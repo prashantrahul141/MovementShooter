@@ -27,6 +27,7 @@ public class GunSystem : MonoBehaviour
     public RaycastHit rayHit;
     public LayerMask enemyLayer;
     public RecoilScript recoilScript;
+    public DecalManager decalManager;
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash_GunCamera;
@@ -85,6 +86,8 @@ public class GunSystem : MonoBehaviour
         // RayCast
         if (Physics.Raycast(fpsCamera.transform.position, direction, out rayHit, range, enemyLayer))
         {
+            Quaternion decalDirection = Quaternion.FromToRotation(Vector3.forward, rayHit.normal);
+            decalManager.CreateDecal(Enums.DecalTypes.METAL, rayHit.point, decalDirection);
             Debug.Log("Hit : " + rayHit.transform.gameObject.name.ToString());
         }
 
