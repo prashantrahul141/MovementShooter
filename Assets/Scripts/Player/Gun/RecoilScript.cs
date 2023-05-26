@@ -25,6 +25,6 @@ public class RecoilScript : MonoBehaviour
 
     public void FireRecoil(ref float recoilX, ref float recoilY)
     {
-        targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), 0);
+        targetRotation += new Vector3(-recoilY, Random.Range(-recoilX, recoilX), 0);
     }
 }
