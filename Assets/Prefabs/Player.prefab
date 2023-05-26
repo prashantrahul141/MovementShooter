@@ -65,6 +65,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 191
   recoilScript: {fileID: 9137898388645658778}
+  decalManager: {fileID: 8000790688706701841}
   muzzleFlash_GunCamera: {fileID: 3283082313625164077}
   muzzleFlash_MainCamera: {fileID: 5773365757592663196}
   gunModel: {fileID: 7679162757941905588}
@@ -133,6 +134,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 191
   recoilScript: {fileID: 9137898388645658778}
+  decalManager: {fileID: 8000790688706701841}
   muzzleFlash_GunCamera: {fileID: 7484741834134975704}
   muzzleFlash_MainCamera: {fileID: 5081574348902278828}
   gunModel: {fileID: 2241830564326287432}
@@ -280,6 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5215427788369743351}
   - component: {fileID: 9137898388645658778}
+  - component: {fileID: 8000790688706701841}
   m_Layer: 0
   m_Name: Recoil
   m_TagString: Untagged
@@ -317,6 +320,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snappiness: 12
   returnSpeed: 5
+--- !u!114 &8000790688706701841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850920994250759353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79c200d11f5e8ef41bb753888b63b0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decals:
+  - type: 0
+    decalObject: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d, type: 3}
+  - type: 1
+    decalObject: {fileID: 1000012142692022, guid: a475880e7da0e9548aa05cb7933752cd, type: 3}
 --- !u!1 &4043006097981244347
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +545,7 @@ MonoBehaviour:
   airDrag: 1
   jumpForce: 18
   jumpCoolDown: 1
-  airMultiplier: 0.2
+  airMultiplier: 0.1
   coyoteTime: 0.2
   jumpBufferTime: 0.2
   dashCoolDown: 0.2
@@ -1008,6 +1028,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 191
   recoilScript: {fileID: 9137898388645658778}
+  decalManager: {fileID: 8000790688706701841}
   muzzleFlash_GunCamera: {fileID: 6340557567287485119}
   muzzleFlash_MainCamera: {fileID: 8627231505490675724}
   gunModel: {fileID: 4221033747958614908}
