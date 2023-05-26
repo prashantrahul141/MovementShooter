@@ -24,7 +24,8 @@ public class MovementScript : MonoBehaviour
     [Header("Jumping")]
     public float jumpForce;
     public float jumpCoolDown;
-    public float airMultiplier;
+    public float airControlMultiplier;
+    public float airMoveSpeedMultipler;
     public float coyoteTime;
     public float jumpBufferTime;
     private float coyoteTimeCounter;
@@ -209,7 +210,7 @@ public class MovementScript : MonoBehaviour
         else if (!grounded)
         {
             rb.AddForce(
-                10f * airMultiplier * moveSpeed * moveDirection.normalized,
+                10f * airControlMultiplier * moveSpeed * moveDirection.normalized,
                 ForceMode.Force
             );
         }
@@ -222,8 +223,23 @@ public class MovementScript : MonoBehaviour
     {
         if (!allowSpeedOverflow)
         {
+            // limiting on air
+            if (movementState == MovementState.AIR)
+            {
+                Vector3 horizontalVel = new(rb.velocity.x, 0, rb.velocity.z);
+                if (horizontalVel.magnitude > moveSpeed * airMoveSpeedMultipler)
+                {
+                    Vector3 horizontalVelDirection =
+                        horizontalVel.normalized * moveSpeed * airMoveSpeedMultipler;
+                    rb.velocity = new Vector3(
+                        horizontalVelDirection.x,
+                        rb.velocity.y,
+                        horizontalVelDirection.z
+                    );
+                }
+            }
             // limiting on slope
-            if (OnSlope() && !exitingSlope)
+            else if (OnSlope() && !exitingSlope)
             {
                 if (rb.velocity.magnitude > moveSpeed)
                 {
