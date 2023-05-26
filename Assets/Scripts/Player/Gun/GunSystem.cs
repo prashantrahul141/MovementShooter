@@ -12,6 +12,8 @@ public class GunSystem : MonoBehaviour
     public int magazineSize,
         bulletsPerTap;
     public bool allowButtonHold;
+    public float recoilX,
+        recoilY;
     private int bulletsLeft,
         bulletsShot;
     private bool shooting,
@@ -24,6 +26,7 @@ public class GunSystem : MonoBehaviour
     public Transform attackPoint;
     public RaycastHit rayHit;
     public LayerMask enemyLayer;
+    public RecoilScript recoilScript;
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash_GunCamera;
@@ -69,6 +72,7 @@ public class GunSystem : MonoBehaviour
 
     private void Shoot()
     {
+        recoilScript.FireRecoil(ref recoilX, ref recoilY);
         readyToShoot = false;
         playerOrientation.transform.rotation = playerOrientation.transform.rotation.normalized;
 
