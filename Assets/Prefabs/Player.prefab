@@ -57,7 +57,7 @@ MonoBehaviour:
   bulletsPerTap: 1
   allowButtonHold: 1
   recoilX: -2
-  recoilY: 7
+  recoilY: 4
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 6558075695794913438}
   attackPoint: {fileID: 937452019663748928}
@@ -126,7 +126,7 @@ MonoBehaviour:
   bulletsPerTap: 1
   allowButtonHold: 0
   recoilX: -2
-  recoilY: 5
+  recoilY: 4
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 3410160221505657101}
   attackPoint: {fileID: 937452019663748928}
@@ -318,8 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e6e4989eb80834cac7be8160b68617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snappiness: 12
-  returnSpeed: 5
+  snappiness: 15
+  returnSpeed: 8
 --- !u!114 &8000790688706701841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,16 +543,16 @@ MonoBehaviour:
   walkSpeed: 20
   groundDrag: 5
   airDrag: 1
-  jumpForce: 22
+  jumpForce: 30
   jumpCoolDown: 1
   airControlMultiplier: 0.4
   airMoveSpeedMultipler: 0.6
   coyoteTime: 0.2
   jumpBufferTime: 0.2
   dashCoolDown: 0.2
-  dashForce: 70
+  dashForce: 80
   totalDash: 2
-  crouchSpeed: 14
+  crouchSpeed: 10
   crouchYScale: 0.5
   pushDownForce: 5
   jumpKey: 32
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   bulletsPerTap: 3
   allowButtonHold: 0
   recoilX: -3
-  recoilY: 15
+  recoilY: 8
   playerOrientation: {fileID: 6481487272268164303}
   fpsCamera: {fileID: 6558075695794913438}
   attackPoint: {fileID: 937452019663748928}
