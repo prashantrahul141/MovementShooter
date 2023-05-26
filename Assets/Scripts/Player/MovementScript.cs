@@ -308,7 +308,7 @@ public class MovementScript : MonoBehaviour
     private void Dash()
     {
         rb.useGravity = false;
-        rb.velocity = new Vector3(0, 3f, 0);
+        rb.velocity = new Vector3(0, 6f, 0);
         if (moveDirection.magnitude >= 0.1f)
         {
             //  dashing in the direction of keys pressed
