@@ -545,7 +545,8 @@ MonoBehaviour:
   airDrag: 1
   jumpForce: 22
   jumpCoolDown: 1
-  airMultiplier: 0.25
+  airControlMultiplier: 0.4
+  airMoveSpeedMultipler: 0.6
   coyoteTime: 0.2
   jumpBufferTime: 0.2
   dashCoolDown: 0.2
