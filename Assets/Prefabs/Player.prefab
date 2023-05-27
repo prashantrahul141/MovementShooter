@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f6a0ac18840084c85f5b26fda06678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 20
+  walkSpeed: 22
   groundDrag: 5
   airDrag: 1
   jumpForce: 30
@@ -552,7 +552,7 @@ MonoBehaviour:
   dashCoolDown: 0.2
   dashForce: 80
   totalDash: 2
-  crouchSpeed: 10
+  crouchSpeed: 15
   crouchYScale: 0.5
   pushDownForce: 5
   jumpKey: 32
