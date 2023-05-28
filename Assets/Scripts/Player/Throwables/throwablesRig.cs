@@ -38,6 +38,8 @@ public class throwablesRig : MonoBehaviour
 
     private void Update()
     {
+        transform.position = playerCamera.position;
+        transform.rotation = playerCamera.rotation;
         if (Input.GetKeyDown(throwKey) && readyToThrow && totalThrows > 0)
         {
             Throw();
@@ -56,8 +58,16 @@ public class throwablesRig : MonoBehaviour
 
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
 
-        Vector3 forceToThrowWith =
-            playerCamera.transform.forward * throwForce + transform.up * throwUpwardForce;
+        Vector3 forceDirection = playerCamera.transform.forward;
+
+        RaycastHit raycastHit;
+
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out raycastHit, 500))
+        {
+            forceDirection = (raycastHit.point - attackPoint.position).normalized;
+        }
+
+        Vector3 forceToThrowWith = forceDirection * throwForce + transform.up * throwUpwardForce;
 
         projectileRb.AddForce(forceToThrowWith, ForceMode.Impulse);
 
