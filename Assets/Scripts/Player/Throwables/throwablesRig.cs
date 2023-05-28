@@ -50,7 +50,7 @@ public class throwablesRig : MonoBehaviour
 
         GameObject projectile = Instantiate<GameObject>(
             objectToThrow,
-            attackPoint.position - new Vector3(0f, 1f, 0f),
+            attackPoint.position,
             playerCamera.rotation
         );
 
