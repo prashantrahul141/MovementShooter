@@ -28,6 +28,7 @@ public class GunSystem : MonoBehaviour
     public LayerMask enemyLayer;
     public RecoilScript recoilScript;
     public DecalManager decalManager;
+    public HudCanvas hudCanvasScript;
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash_GunCamera;
@@ -36,13 +37,17 @@ public class GunSystem : MonoBehaviour
 
     private void Start()
     {
+        hudCanvasScript = Component.FindAnyObjectByType<HudCanvas>();
         bulletsLeft = magazineSize;
         readyToShoot = true;
     }
 
     private void Update()
     {
-        TakeInput();
+        if (mainChecks())
+        {
+            TakeInput();
+        }
     }
 
     private void TakeInput()
@@ -132,5 +137,10 @@ public class GunSystem : MonoBehaviour
     public bool IsShooting()
     {
         return (!readyToShoot && !reloading && bulletsLeft > 0);
+    }
+
+    private bool mainChecks()
+    {
+        return !hudCanvasScript.gameIsPaused;
     }
 }
