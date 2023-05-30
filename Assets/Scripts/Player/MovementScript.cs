@@ -1,15 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-// player states
-public enum MovementState
-{
-    WALKING,
-    CROUCHING,
-    DASHING,
-    AIR
-}
-
 public class MovementScript : MonoBehaviour
 {
     [Header("Basic Movement")]
@@ -69,7 +60,7 @@ public class MovementScript : MonoBehaviour
 
     [Header("References")]
     public Transform playerOrientation;
-    public MovementState movementState;
+    public Enums.MovementState movementState;
     public Rigidbody rb;
     public HudCanvas hudCanvasScript;
 
@@ -97,7 +88,7 @@ public class MovementScript : MonoBehaviour
         grounded = Physics.Raycast(
             transform.position,
             Vector3.down,
-            playerHeight * 0.5f * (movementState == MovementState.CROUCHING ? 0.5f : 1f)
+            playerHeight * 0.5f * (movementState == Enums.MovementState.CROUCHING ? 0.5f : 1f)
                 + groundCheckPadding,
             groundLayer
         );
@@ -162,28 +153,28 @@ public class MovementScript : MonoBehaviour
         // set dashing
         if (allowSpeedOverflow)
         {
-            movementState = MovementState.DASHING;
+            movementState = Enums.MovementState.DASHING;
         }
         // set crouching
         else if (Input.GetKey(crouchKey))
         {
-            if (movementState == MovementState.AIR)
+            if (movementState == Enums.MovementState.AIR)
             {
                 pushDownPlayer = true;
             }
-            movementState = MovementState.CROUCHING;
+            movementState = Enums.MovementState.CROUCHING;
             moveSpeed = crouchSpeed;
         }
         // set walking
         else if (grounded)
         {
-            movementState = MovementState.WALKING;
+            movementState = Enums.MovementState.WALKING;
             moveSpeed = walkSpeed;
         }
         // set in air
         else
         {
-            movementState = MovementState.AIR;
+            movementState = Enums.MovementState.AIR;
         }
     }
 
@@ -229,7 +220,7 @@ public class MovementScript : MonoBehaviour
         if (!allowSpeedOverflow)
         {
             // limiting on air
-            if (movementState == MovementState.AIR)
+            if (movementState == Enums.MovementState.AIR)
             {
                 Vector3 horizontalVel = new(rb.velocity.x, 0, rb.velocity.z);
                 if (horizontalVel.magnitude > moveSpeed * airMoveSpeedMultipler)
@@ -366,7 +357,7 @@ public class MovementScript : MonoBehaviour
 
     private float getCurrentDrag()
     {
-        if (movementState == MovementState.DASHING)
+        if (movementState == Enums.MovementState.DASHING)
         {
             return 0.0f;
         }
