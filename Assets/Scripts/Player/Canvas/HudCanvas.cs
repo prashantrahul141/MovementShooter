@@ -34,7 +34,7 @@ public class HudCanvas : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         gameIsPaused = true;
         pauseMenuUI.SetActive(true);
@@ -44,8 +44,8 @@ public class HudCanvas : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         gameIsPaused = false;
         pauseMenuUI.SetActive(false);
         resumeMenuUI.SetActive(true);
