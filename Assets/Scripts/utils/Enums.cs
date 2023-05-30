@@ -5,4 +5,12 @@ public static class Enums
         METAL,
         SAND,
     }
+
+    public enum MovementState
+    {
+        WALKING,
+        CROUCHING,
+        DASHING,
+        AIR
+    }
 }
