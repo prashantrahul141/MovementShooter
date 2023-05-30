@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class HudCanvas : MonoBehaviour
 {
-    public static bool gameIsPaused = false;
+    public bool gameIsPaused = false;
 
     [SerializeField]
     private GameObject pauseMenuUI;
