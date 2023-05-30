@@ -71,20 +71,25 @@ public class MovementScript : MonoBehaviour
     public Transform playerOrientation;
     public MovementState movementState;
     public Rigidbody rb;
+    public HudCanvas hudCanvasScript;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        hudCanvasScript = Component.FindAnyObjectByType<HudCanvas>();
         rb.freezeRotation = true;
         readyToJump = true;
     }
 
     void Update()
     {
-        GetInput();
-        SpeedControl();
-        StateHandler();
-        rb.drag = getCurrentDrag();
+        if (mainChecks())
+        {
+            GetInput();
+            SpeedControl();
+            StateHandler();
+            rb.drag = getCurrentDrag();
+        }
     }
 
     void FixedUpdate()
@@ -369,5 +374,10 @@ public class MovementScript : MonoBehaviour
         {
             return grounded ? groundDrag : airDrag;
         }
+    }
+
+    private bool mainChecks()
+    {
+        return !hudCanvasScript.gameIsPaused;
     }
 }
