@@ -3,7 +3,7 @@ using UnityEngine;
 public class Logger : MonoBehaviour
 {
     [SerializeField]
-    bool showConsole = false;
+    public bool showConsole = false;
 
     [SerializeField]
     bool saveInFile = false;
@@ -11,7 +11,7 @@ public class Logger : MonoBehaviour
     [SerializeField]
     string filename = "";
 
-    string myLog = "*begin log";
+    string logsCollected = "*begin log";
     string inputString = "";
     int kChars = 700;
 
@@ -38,10 +38,10 @@ public class Logger : MonoBehaviour
     public void Log(string logString, string stackTrace, LogType type)
     {
         // for onscreen...
-        myLog = myLog + "\n" + logString;
-        if (myLog.Length > kChars)
+        logsCollected = logsCollected + "\n" + logString;
+        if (logsCollected.Length > kChars)
         {
-            myLog = myLog.Substring(myLog.Length - kChars);
+            logsCollected = logsCollected.Substring(logsCollected.Length - kChars);
         }
 
         // for the file ...
@@ -75,7 +75,7 @@ public class Logger : MonoBehaviour
             Quaternion.identity,
             new Vector3(Screen.width / 1200.0f, Screen.height / 800.0f, 1.0f)
         );
-
-        inputString = GUI.TextField(new Rect(10, 10, Screen.width + 2f, 30f), inputString);
+        GUI.TextArea(new Rect(10, 10, Screen.width - 60, 370), logsCollected);
+        inputString = GUI.TextField(new Rect(10, 380, Screen.width - 60, 30f), inputString);
     }
 }
