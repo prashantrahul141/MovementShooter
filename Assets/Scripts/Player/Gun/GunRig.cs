@@ -9,8 +9,13 @@ public class GunRig : MonoBehaviour
 
     private int previousSelected;
 
+    private Logger consoleLogger;
+    private HudCanvas hudCanvas;
+
     void Start()
     {
+        hudCanvas = Component.FindAnyObjectByType<HudCanvas>();
+        consoleLogger = Component.FindAnyObjectByType<Logger>();
         changeGun();
     }
 
@@ -23,19 +28,22 @@ public class GunRig : MonoBehaviour
 
     void GetInput()
     {
-        previousSelected = selectedGun;
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+        if (mainChecks())
         {
-            selectedGun = selectedGun >= transform.childCount ? 0 : selectedGun + 1;
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
-            selectedGun = selectedGun <= 0 ? transform.childCount : selectedGun - 1;
-        }
+            previousSelected = selectedGun;
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                selectedGun = selectedGun >= transform.childCount ? 0 : selectedGun + 1;
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                selectedGun = selectedGun <= 0 ? transform.childCount : selectedGun - 1;
+            }
 
-        if (selectedGun != previousSelected)
-        {
-            changeGun();
+            if (selectedGun != previousSelected)
+            {
+                changeGun();
+            }
         }
     }
 
@@ -54,5 +62,10 @@ public class GunRig : MonoBehaviour
             }
             i++;
         }
+    }
+
+    bool mainChecks()
+    {
+        return !consoleLogger.showConsole && !hudCanvas.gameIsPaused;
     }
 }
