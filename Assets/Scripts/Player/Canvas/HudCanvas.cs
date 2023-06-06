@@ -11,11 +11,11 @@ public class HudCanvas : MonoBehaviour
     [SerializeField]
     private GameObject resumeMenuUI;
 
-    public DebugController consoleLogger;
+    public DebugController debugController;
 
     private void Start()
     {
-        consoleLogger = Component.FindAnyObjectByType<DebugController>();
+        debugController = Component.FindAnyObjectByType<DebugController>();
         Resume();
     }
 
@@ -23,7 +23,7 @@ public class HudCanvas : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            consoleLogger.showConsole = false;
+            debugController.changeUIState(false);
             if (gameIsPaused)
             {
                 Resume();
