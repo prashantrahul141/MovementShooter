@@ -106,7 +106,7 @@ public class DebugController : MonoBehaviour
             changeUIState(!showConsole);
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && inputTextField.isFocused)
         {
             OnReturn();
         }
