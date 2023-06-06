@@ -29,18 +29,22 @@ public class throwablesRig : MonoBehaviour
     [SerializeField]
     private float throwUpwardForce;
 
+    [SerializeField]
+    private DebugController debugController;
+
     private bool readyToThrow;
 
     private void Start()
     {
         readyToThrow = true;
+        debugController = Component.FindAnyObjectByType<DebugController>();
     }
 
     private void Update()
     {
         transform.position = playerCamera.position;
         transform.rotation = playerCamera.rotation;
-        if (Input.GetKeyDown(throwKey) && readyToThrow && totalThrows > 0)
+        if (Input.GetKeyDown(throwKey) && readyToThrow && totalThrows > 0 && mainChecks())
         {
             Throw();
         }
@@ -79,5 +83,10 @@ public class throwablesRig : MonoBehaviour
     private void ResetThrow()
     {
         readyToThrow = true;
+    }
+
+    private bool mainChecks()
+    {
+        return !debugController.showConsole;
     }
 }
