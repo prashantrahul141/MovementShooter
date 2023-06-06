@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Logger : MonoBehaviour
+public class DebugController : MonoBehaviour
 {
     [SerializeField]
     public bool showConsole = false;

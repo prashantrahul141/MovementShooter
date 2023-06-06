@@ -11,11 +11,11 @@ public class HudCanvas : MonoBehaviour
     [SerializeField]
     private GameObject resumeMenuUI;
 
-    public Logger consoleLogger;
+    public DebugController consoleLogger;
 
     private void Start()
     {
-        consoleLogger = Component.FindAnyObjectByType<Logger>();
+        consoleLogger = Component.FindAnyObjectByType<DebugController>();
         Resume();
     }
 

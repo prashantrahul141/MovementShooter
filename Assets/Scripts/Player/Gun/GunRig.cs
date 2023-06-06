@@ -9,13 +9,13 @@ public class GunRig : MonoBehaviour
 
     private int previousSelected;
 
-    private Logger consoleLogger;
+    private DebugController consoleLogger;
     private HudCanvas hudCanvas;
 
     void Start()
     {
         hudCanvas = Component.FindAnyObjectByType<HudCanvas>();
-        consoleLogger = Component.FindAnyObjectByType<Logger>();
+        consoleLogger = Component.FindAnyObjectByType<DebugController>();
         changeGun();
     }
 

@@ -10,11 +10,11 @@ public class PlayerCam : MonoBehaviour
 
     private float xRotation;
     private float yRotation;
-    private Logger consoleLogger;
+    private DebugController consoleLogger;
 
     void Start()
     {
-        consoleLogger = Component.FindAnyObjectByType<Logger>();
+        consoleLogger = Component.FindAnyObjectByType<DebugController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

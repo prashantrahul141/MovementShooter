@@ -63,13 +63,13 @@ public class MovementScript : MonoBehaviour
     public Enums.MovementState movementState;
     public Rigidbody rb;
     public HudCanvas hudCanvasScript;
-    public Logger consoleLogger;
+    public DebugController consoleLogger;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         hudCanvasScript = Component.FindAnyObjectByType<HudCanvas>();
-        consoleLogger = Component.FindAnyObjectByType<Logger>();
+        consoleLogger = Component.FindAnyObjectByType<DebugController>();
         rb.freezeRotation = true;
         readyToJump = true;
     }
