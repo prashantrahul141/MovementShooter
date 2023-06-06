@@ -29,6 +29,7 @@ public class GunSystem : MonoBehaviour
     public RecoilScript recoilScript;
     public DecalManager decalManager;
     public HudCanvas hudCanvasScript;
+    public DebugController debugController;
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash_GunCamera;
@@ -38,6 +39,7 @@ public class GunSystem : MonoBehaviour
     private void Start()
     {
         hudCanvasScript = Component.FindAnyObjectByType<HudCanvas>();
+        debugController = Component.FindAnyObjectByType<DebugController>();
         bulletsLeft = magazineSize;
         readyToShoot = true;
     }
@@ -141,6 +143,6 @@ public class GunSystem : MonoBehaviour
 
     private bool mainChecks()
     {
-        return !hudCanvasScript.gameIsPaused;
+        return !hudCanvasScript.gameIsPaused && !debugController.showConsole;
     }
 }
