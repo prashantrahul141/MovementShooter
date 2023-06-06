@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class DebugController : MonoBehaviour
@@ -22,6 +23,9 @@ public class DebugController : MonoBehaviour
 
     [SerializeField]
     private TMP_InputField inputTextField;
+
+    [SerializeField]
+    private TMP_Text logTextField;
 
     // commands
     public static DebugCommand QUIT;
@@ -106,7 +110,7 @@ public class DebugController : MonoBehaviour
             changeUIState(!showConsole);
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && inputTextField.isFocused)
+        if (Input.GetKeyDown(KeyCode.Return) && inputTextField.text.Length > 0)
         {
             OnReturn();
         }
@@ -120,6 +124,8 @@ public class DebugController : MonoBehaviour
         {
             logsCollected = logsCollected.Substring(logsCollected.Length - maxLogString);
         }
+
+        logTextField.text = logsCollected;
 
         // for the file ...
         if (saveInFile)
