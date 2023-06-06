@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DebugController : MonoBehaviour
 {
@@ -13,21 +14,25 @@ public class DebugController : MonoBehaviour
     string filename = "";
 
     string logsCollected = "*begin log";
-    string inputString = "";
     int maxLogString = 700;
 
     // refs
     [SerializeField]
     private GameObject UIPanel;
 
-    // [SerializeField]
+    [SerializeField]
+    private TMP_InputField inputTextField;
+
     // commands
     public static DebugCommand QUIT;
+    public static DebugCommand TOGGLE_CONSOLE;
     public List<object> commandList;
 
     void Start()
     {
         UIPanel.SetActive(showConsole);
+
+        // all commands
         QUIT = new DebugCommand(
             "quit",
             "Quit game.",
@@ -38,7 +43,17 @@ public class DebugController : MonoBehaviour
             }
         );
 
-        commandList = new List<object> { QUIT };
+        TOGGLE_CONSOLE = new DebugCommand(
+            "toggle_console",
+            "toggles the console window",
+            "toggle_console",
+            () =>
+            {
+                changeUIState(!showConsole);
+            }
+        );
+
+        commandList = new List<object> { QUIT, TOGGLE_CONSOLE };
     }
 
     void OnReturn()
@@ -46,7 +61,7 @@ public class DebugController : MonoBehaviour
         if (showConsole)
         {
             HandleInput();
-            inputString = "";
+            inputTextField.SetTextWithoutNotify("");
         }
     }
 
@@ -56,7 +71,7 @@ public class DebugController : MonoBehaviour
         {
             DebugCommandBase commandBase = commandList[i] as DebugCommandBase;
 
-            if (inputString.Contains(commandBase.commandID))
+            if (inputTextField.text.ToString().Contains(commandBase.commandID))
             {
                 if (commandList[i] as DebugCommand != null)
                 {
