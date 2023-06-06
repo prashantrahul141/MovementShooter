@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DebugController : MonoBehaviour
@@ -13,7 +14,57 @@ public class DebugController : MonoBehaviour
 
     string logsCollected = "*begin log";
     string inputString = "";
-    int kChars = 700;
+    int maxLogString = 700;
+
+    // refs
+    [SerializeField]
+    private GameObject UIPanel;
+
+    // [SerializeField]
+    // commands
+    public static DebugCommand QUIT;
+    public List<object> commandList;
+
+    void Start()
+    {
+        UIPanel.SetActive(showConsole);
+        QUIT = new DebugCommand(
+            "quit",
+            "Quit game.",
+            "kill_all",
+            () =>
+            {
+                Application.Quit();
+            }
+        );
+
+        commandList = new List<object> { QUIT };
+    }
+
+    void OnReturn()
+    {
+        if (showConsole)
+        {
+            HandleInput();
+            inputString = "";
+        }
+    }
+
+    void HandleInput()
+    {
+        for (int i = 0; i < commandList.Count; i++)
+        {
+            DebugCommandBase commandBase = commandList[i] as DebugCommandBase;
+
+            if (inputString.Contains(commandBase.commandID))
+            {
+                if (commandList[i] as DebugCommand != null)
+                {
+                    (commandList[i] as DebugCommand).Invoke();
+                }
+            }
+        }
+    }
 
     void OnEnable()
     {
@@ -25,13 +76,24 @@ public class DebugController : MonoBehaviour
         Application.logMessageReceived -= Log;
     }
 
+    public void changeUIState(bool state)
+    {
+        showConsole = state;
+        UIPanel.SetActive(showConsole);
+        Cursor.lockState = state ? CursorLockMode.Confined : CursorLockMode.Locked;
+        Cursor.visible = showConsole;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            showConsole = !showConsole;
-            Cursor.lockState = showConsole ? CursorLockMode.Confined : CursorLockMode.Locked;
-            Cursor.visible = showConsole ? true : false;
+            changeUIState(!showConsole);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            OnReturn();
         }
     }
 
@@ -39,9 +101,9 @@ public class DebugController : MonoBehaviour
     {
         // for onscreen...
         logsCollected = logsCollected + "\n" + logString;
-        if (logsCollected.Length > kChars)
+        if (logsCollected.Length > maxLogString)
         {
-            logsCollected = logsCollected.Substring(logsCollected.Length - kChars);
+            logsCollected = logsCollected.Substring(logsCollected.Length - maxLogString);
         }
 
         // for the file ...
@@ -62,20 +124,5 @@ public class DebugController : MonoBehaviour
             }
             catch { }
         }
-    }
-
-    void OnGUI()
-    {
-        if (!showConsole)
-        {
-            return;
-        }
-        GUI.matrix = Matrix4x4.TRS(
-            Vector3.zero,
-            Quaternion.identity,
-            new Vector3(Screen.width / 1200.0f, Screen.height / 800.0f, 1.0f)
-        );
-        GUI.TextArea(new Rect(10, 10, Screen.width - 60, 370), logsCollected);
-        inputString = GUI.TextField(new Rect(10, 380, Screen.width - 60, 30f), inputString);
     }
 }
