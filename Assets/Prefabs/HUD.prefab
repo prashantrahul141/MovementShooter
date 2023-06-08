@@ -1746,7 +1746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showConsole: 0
-  saveInFile: 1
+  saveInFile: 0
   filename: 
   UIPanel: {fileID: 5171201821824374549}
   inputTextField: {fileID: 2540008457145159664}
