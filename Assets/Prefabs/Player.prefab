@@ -66,6 +66,8 @@ MonoBehaviour:
     m_Bits: 191
   recoilScript: {fileID: 9137898388645658778}
   decalManager: {fileID: 8000790688706701841}
+  hudCanvasScript: {fileID: 0}
+  debugController: {fileID: 0}
   muzzleFlash_GunCamera: {fileID: 3283082313625164077}
   muzzleFlash_MainCamera: {fileID: 5773365757592663196}
   gunModel: {fileID: 7679162757941905588}
@@ -135,6 +137,8 @@ MonoBehaviour:
     m_Bits: 191
   recoilScript: {fileID: 9137898388645658778}
   decalManager: {fileID: 8000790688706701841}
+  hudCanvasScript: {fileID: 0}
+  debugController: {fileID: 0}
   muzzleFlash_GunCamera: {fileID: 7484741834134975704}
   muzzleFlash_MainCamera: {fileID: 5081574348902278828}
   gunModel: {fileID: 2241830564326287432}
@@ -568,6 +572,8 @@ MonoBehaviour:
   playerOrientation: {fileID: 6481487272268164303}
   movementState: 3
   rb: {fileID: 6481487271229353097}
+  hudCanvasScript: {fileID: 0}
+  debugController: {fileID: 0}
 --- !u!54 &6481487271229353097
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -887,6 +893,8 @@ MonoBehaviour:
     m_Bits: 191
   recoilScript: {fileID: 9137898388645658778}
   decalManager: {fileID: 8000790688706701841}
+  hudCanvasScript: {fileID: 0}
+  debugController: {fileID: 0}
   muzzleFlash_GunCamera: {fileID: 6340557567287485119}
   muzzleFlash_MainCamera: {fileID: 8627231505490675724}
   gunModel: {fileID: 4221033747958614908}
@@ -1049,11 +1057,13 @@ MonoBehaviour:
   playerCamera: {fileID: 3355110592844539030}
   attackPoint: {fileID: 5500399625098774140}
   objectToThrow: {fileID: 1738922697242817652, guid: a5d1e83bfa9fa794dad19ffdeb13666d, type: 3}
+  playerCollider: {fileID: 6481487271824296526}
   totalThrows: 999
   throwCoolDown: 0.1
   throwKey: 103
   throwForce: 50
   throwUpwardForce: 10
+  debugController: {fileID: 0}
 --- !u!1001 &2239118234223773824
 PrefabInstance:
   m_ObjectHideFlags: 0
