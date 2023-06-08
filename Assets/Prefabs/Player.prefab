@@ -843,7 +843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2161758198161560895
 Transform:
   m_ObjectHideFlags: 0
@@ -1057,7 +1057,6 @@ MonoBehaviour:
   playerCamera: {fileID: 3355110592844539030}
   attackPoint: {fileID: 5500399625098774140}
   objectToThrow: {fileID: 1738922697242817652, guid: a5d1e83bfa9fa794dad19ffdeb13666d, type: 3}
-  playerCollider: {fileID: 6481487271824296526}
   totalThrows: 999
   throwCoolDown: 0.1
   throwKey: 103
