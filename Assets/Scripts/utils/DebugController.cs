@@ -143,7 +143,7 @@ public class DebugController : MonoBehaviour
                         ) + String.Format("/{0}", UnityEditor.PlayerSettings.productName);
                     System.IO.Directory.CreateDirectory(d);
                     string r = UnityEngine.Random.Range(1000, 9999).ToString();
-                    filename = d + "/log-" + r + ".txt";
+                    filename = d + "/log-" + r + ".log";
                 }
                 try
                 {
