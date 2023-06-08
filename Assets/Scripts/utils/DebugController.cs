@@ -10,6 +10,9 @@ public class DebugController : MonoBehaviour
     public bool showConsole = false;
 
     [SerializeField]
+    private LogType logType;
+
+    [SerializeField]
     bool saveInFile = false;
 
     [SerializeField]
@@ -119,38 +122,41 @@ public class DebugController : MonoBehaviour
 
     public void Log(string logString, string stackTrace, LogType type)
     {
-        // for onscreen...
-        logsCollected = logsCollected + "\n" + logString;
-        if (logsCollected.Length > maxLogString)
+        if (type > logType)
         {
-            logsCollected = logsCollected.Substring(logsCollected.Length - maxLogString);
-        }
-        logTextField.text = logsCollected;
+            // for onscreen...
+            logsCollected = logsCollected + "\n" + logString;
+            if (logsCollected.Length > maxLogString)
+            {
+                logsCollected = logsCollected.Substring(logsCollected.Length - maxLogString);
+            }
+            logTextField.text = logsCollected;
 
-        // for the file ...
-        if (saveInFile)
-        {
-            if (filename == "")
+            // for the file ...
+            if (saveInFile)
             {
-                string d =
-                    System.Environment.GetFolderPath(
-                        System.Environment.SpecialFolder.CommonDocuments
-                    ) + String.Format("/{0}", UnityEditor.PlayerSettings.productName);
-                System.IO.Directory.CreateDirectory(d);
-                string r = UnityEngine.Random.Range(1000, 9999).ToString();
-                filename = d + "/log-" + r + ".txt";
-            }
-            try
-            {
-                System.IO.File.AppendAllText(filename, logString + "\n");
-            }
-            catch (Exception saveEx)
-            {
+                if (filename == "")
+                {
+                    string d =
+                        System.Environment.GetFolderPath(
+                            System.Environment.SpecialFolder.CommonDocuments
+                        ) + String.Format("/{0}", UnityEditor.PlayerSettings.productName);
+                    System.IO.Directory.CreateDirectory(d);
+                    string r = UnityEngine.Random.Range(1000, 9999).ToString();
+                    filename = d + "/log-" + r + ".txt";
+                }
+                try
+                {
+                    System.IO.File.AppendAllText(filename, logString + "\n");
+                }
+                catch (Exception saveEx)
+                {
 #if !UNITY_EDITOR
-                throw saveEx;
-# else
-                Debug.LogError(saveEx);
+                    throw saveEx;
+#else
+                    Debug.LogError(saveEx);
 #endif
+                }
             }
         }
     }
