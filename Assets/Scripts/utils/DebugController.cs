@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 using TMPro;
+using System;
 
 public class DebugController : MonoBehaviour
 {
@@ -124,7 +125,6 @@ public class DebugController : MonoBehaviour
         {
             logsCollected = logsCollected.Substring(logsCollected.Length - maxLogString);
         }
-
         logTextField.text = logsCollected;
 
         // for the file ...
@@ -133,17 +133,25 @@ public class DebugController : MonoBehaviour
             if (filename == "")
             {
                 string d =
-                    System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop)
-                    + "/YOUR_LOGS";
+                    System.Environment.GetFolderPath(
+                        System.Environment.SpecialFolder.CommonDocuments
+                    ) + String.Format("/{0}", UnityEditor.PlayerSettings.productName);
                 System.IO.Directory.CreateDirectory(d);
-                string r = Random.Range(1000, 9999).ToString();
+                string r = UnityEngine.Random.Range(1000, 9999).ToString();
                 filename = d + "/log-" + r + ".txt";
             }
             try
             {
                 System.IO.File.AppendAllText(filename, logString + "\n");
             }
-            catch { }
+            catch (Exception saveEx)
+            {
+#if !UNITY_EDITOR
+                throw saveEx;
+# else
+                Debug.LogError(saveEx);
+#endif
+            }
         }
     }
 }
