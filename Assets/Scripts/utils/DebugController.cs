@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-
 using TMPro;
 using System;
 
@@ -140,7 +139,7 @@ public class DebugController : MonoBehaviour
                     string d =
                         System.Environment.GetFolderPath(
                             System.Environment.SpecialFolder.CommonDocuments
-                        ) + String.Format("/{0}", UnityEditor.PlayerSettings.productName);
+                        ) + String.Format("/{0}", Application.productName);
                     System.IO.Directory.CreateDirectory(d);
                     string r = UnityEngine.Random.Range(1000, 9999).ToString();
                     filename = d + "/log-" + r + ".log";
