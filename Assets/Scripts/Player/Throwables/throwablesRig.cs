@@ -64,9 +64,9 @@ public class throwablesRig : MonoBehaviour
         Vector3 forceDirection = playerCamera.transform.forward;
         RaycastHit raycastHit;
 
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out raycastHit, 500))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out raycastHit, 10))
         {
-            forceDirection = (raycastHit.point - attackPoint.position).normalized;
+            forceDirection = (raycastHit.point - playerCamera.position).normalized;
         }
 
         Vector3 forceToThrowWith = forceDirection * throwForce + transform.up * throwUpwardForce;
