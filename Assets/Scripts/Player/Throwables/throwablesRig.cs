@@ -61,9 +61,7 @@ public class throwablesRig : MonoBehaviour
         );
 
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-
         Vector3 forceDirection = playerCamera.transform.forward;
-
         RaycastHit raycastHit;
 
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out raycastHit, 500))
@@ -72,9 +70,7 @@ public class throwablesRig : MonoBehaviour
         }
 
         Vector3 forceToThrowWith = forceDirection * throwForce + transform.up * throwUpwardForce;
-
         projectileRb.AddForce(forceToThrowWith, ForceMode.Impulse);
-
         totalThrows--;
 
         Invoke(nameof(ResetThrow), throwCoolDown);
