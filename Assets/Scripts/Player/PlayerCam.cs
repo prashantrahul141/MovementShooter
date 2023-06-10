@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
-    [Header("Senstivity")]
-    public float sensX;
-    public float sensY;
-
     public Transform playerOrientation;
 
+    private float sensX;
+    private float sensY;
     private float xRotation;
     private float yRotation;
     private DebugController consoleLogger;
 
     void Start()
     {
+        sensX = PlayerPrefs.GetFloat("user_senstivity", 200.0f);
+        sensY = PlayerPrefs.GetFloat("user_senstivity", 200.0f);
         consoleLogger = Component.FindAnyObjectByType<DebugController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
